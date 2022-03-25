@@ -30,13 +30,15 @@
 
 (setq inhibit-startup-message t) ; Don't show the splash screen
 (setq ring-bell-function 'ignore) ; prevent beep sound.
+(setq require-final-newline t) ; Add new line end of the file
+(setq truncate-lines t)
 
 ;; Modes
 (global-display-line-numbers-mode -1)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(hl-line-mode 1)
+(global-hl-line-mode)
 (global-auto-revert-mode 1)
 (blink-cursor-mode -1)
 ;; (setq global-auto-revert-non-file-buffers t)
@@ -49,13 +51,11 @@
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
 (load custom-file 'noerror 'nomessage)
 
-
 ;; Macos Key Bindings
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
       mac-option-modifier 'none)
-
 
 ;; Some Extra Keybindings
 ;; source: spacemacs' better default layer
@@ -152,9 +152,14 @@
   :config
   (winner-mode))
 
+(use-package minions
+  :hook (doom-modeline-mode . minions-mode))
+
 (use-package doom-modeline
   :config
-  (doom-modeline-mode))
+  (doom-modeline-mode)
+  :custom
+  (doom-modeline-minor-modes t))
 
 (use-package page-break-lines)
 
@@ -162,9 +167,37 @@
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
 
-(use-package magit)
+(use-package magit
+  :commands magit)
 
 (use-package which-key
   :init (which-key-mode)
   :config
   (setq which-key-idle-delay 0.3))
+
+(use-package lsp-mode
+  :commands lsp)
+
+(setq lsp-ui-doc-enable nil)
+
+(use-package go-mode
+  :hook (go-mode . lsp-deferred))
+
+(use-package company
+  :custom
+  (company-idle-delay 0))
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+			 (require 'lsp-pyright)
+			 (lsp))))
+
+(defun efs/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                    (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'efs/display-startup-time)
