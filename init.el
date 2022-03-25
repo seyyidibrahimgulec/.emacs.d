@@ -104,6 +104,11 @@
 	expand-region-subword-enabled t)
   :bind (("C-t" . er/expand-region)))
 
+;; Projectile
+(use-package projectile
+  :config (projectile-mode)
+  :demand t)
+
 ;; Counsel Projectile
 (use-package counsel-projectile
   :after projectile
