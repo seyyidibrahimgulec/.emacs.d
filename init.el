@@ -21,7 +21,7 @@
 
 (use-package doom-themes :defer t)
 (load-theme 'doom-snazzy t)
-(set-face-attribute 'default nil :font "Fira Code" :height 120)
+(set-face-attribute 'default nil :font "Fira Code")
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
