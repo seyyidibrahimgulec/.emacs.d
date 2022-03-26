@@ -35,10 +35,11 @@
 
 ;; Modes
 (global-display-line-numbers-mode -1)
+(column-number-mode 1)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(global-hl-line-mode)
+(global-hl-line-mode 1)
 (global-auto-revert-mode 1)
 (blink-cursor-mode -1)
 ;; (setq global-auto-revert-non-file-buffers t)
