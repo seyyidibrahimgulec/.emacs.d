@@ -118,7 +118,10 @@
   (counsel-projectile-mode))
 
 (use-package ivy
-  :bind (("C-s" . swiper))
+  :bind (("C-s" . swiper)
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-e" . ivy-alt-done))
   :init
   (ivy-mode 1)
   :config
@@ -129,7 +132,9 @@
   :demand t
   :bind (("M-x" . counsel-M-x)
 	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)))
+	 ("C-x C-f" . counsel-find-file)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history)))
 
 (use-package ivy-rich
   :init
