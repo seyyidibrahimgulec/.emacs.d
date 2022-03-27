@@ -216,6 +216,9 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-key] . helpful-key))
 
+(use-package turkish
+  :commands turkish-mode turkish-correct-region turkish-asciify-region)
+
 (defun efs/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
