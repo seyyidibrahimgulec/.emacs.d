@@ -111,7 +111,11 @@
 ;; Projectile
 (use-package projectile
   :config (projectile-mode)
-  :demand t)
+  :demand t
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (setq projectile-switch-project-action #'projectile-dired))
 
 ;; Counsel Projectile
 (use-package counsel-projectile
