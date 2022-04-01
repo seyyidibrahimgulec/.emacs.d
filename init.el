@@ -130,10 +130,10 @@
   (counsel-projectile-mode))
 
 (use-package ivy
-  :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-e" . ivy-alt-done))
+  :bind (("C-s" . swiper))
+  ;; :map ivy-minibuffer-map
+  ;; ("TAB" . ivy-alt-done)
+  ;; ("C-e" . ivy-alt-done))
   :init
   (ivy-mode 1)
   :config
@@ -178,8 +178,6 @@
   (doom-modeline-mode)
   :custom
   (doom-modeline-minor-modes t))
-
-(use-package page-break-lines)
 
 (use-package all-the-icons)
 (use-package all-the-icons-dired
