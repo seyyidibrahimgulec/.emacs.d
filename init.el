@@ -82,7 +82,6 @@
 (keyboard-translate ?\C-h ?\C-?)
 (global-set-key (kbd "C-?") 'help-command)
 
-
 (use-package beacon
   :config
   (beacon-mode 1))
@@ -125,7 +124,7 @@
 ;; Counsel Projectile
 (use-package counsel-projectile
   :after projectile
-  :bind (("C-x f" . counsel-projectile))
+  :bind (("C-x f" . counsel-projectile-find-file))
   :config
   (counsel-projectile-mode))
 
@@ -136,9 +135,13 @@
   ;; ("C-e" . ivy-alt-done))
   :init
   (ivy-mode 1)
+  :custom-face
+  (ivy-current-match ((t (:extend t))))
   :config
-  ;; Don't start searches with ^
-  (setq ivy-initial-inputs-alist nil))
+  (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line) ;; to extend ivy line
+  :custom
+  (ivy-format-function 'ivy-format-function-line)
+  (ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
 
 (use-package counsel
   :demand t
