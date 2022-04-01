@@ -226,7 +226,16 @@
 (use-package turkish
   :commands turkish-mode turkish-correct-region turkish-asciify-region)
 
-(defun efs/display-startup-time ()
+(use-package sozluk
+  :straight (:host github :repo "isamert/sozluk.el")
+  :commands sozluk)
+
+(use-package yaml-mode
+  :mode "\\.ya?ml\\'")
+
+(use-package xwidget
+  :straight (:type built-in)
+  :commands xwidget-webkit-browse-url)
 
 (defun ig/org-mode-setup ()
   (org-indent-mode)
