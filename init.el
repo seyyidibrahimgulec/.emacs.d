@@ -188,26 +188,40 @@
 
 (use-package which-key
   :init (which-key-mode)
-  :config
-  (setq which-key-idle-delay 0.3))
+  :custom
+  (which-key-idle-delay 0.3))
 
 (use-package lsp-mode
-  :commands lsp)
+  :commands (lsp lsp-deferred)
+  :custom
+  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-diagnostics-provider :none) ;; To disable default lsp flycheck
+  (lsp-file-watch-threshold 10000))
 
-(setq lsp-ui-doc-enable nil)
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-show-with-cursor nil)
+  (lsp-ui-doc-show-with-mouse nil))
+
+(use-package lsp-pyright
+  :hook (python-mode . lsp-deferred))
 
 (use-package go-mode
   :hook (go-mode . lsp-deferred))
 
+(use-package python
+  :straight (:type built-in))
+
+(use-package flycheck
+  :defer t
+  :hook (lsp-mode . flycheck-mode)
+  :custom
+  (flycheck-checker-error-threshold 1000))
+
 (use-package company
   :custom
   (company-idle-delay 0))
-
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
