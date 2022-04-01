@@ -267,10 +267,10 @@
   :custom-face
   (org-document-title ((t (:font "Iosevka Aile" :height 1.5 :weight bold))))
   (org-level-7 ((t (:font "Iosevka Aile" :inherit outline-7 :height 1.1 :weight bold))))
-  (org-level-6 ((t (:font "Iosevka Aile" :inherit outline-6 :height 1.1 :weight bold))))
+  (org-level-6 ((t (:font "Iosevka Aile" :inherit outline-6 :height 1.15 :weight bold))))
   (org-level-5 ((t (:font "Iosevka Aile" :inherit outline-5 :height 1.2 :weight bold))))
-  (org-level-4 ((t (:font "Iosevka Aile" :inherit outline-4 :height 1.28 :weight bold))))
-  (org-level-3 ((t (:font "Iosevka Aile" :inherit outline-3 :height 1.33 :weight bold))))
+  (org-level-4 ((t (:font "Iosevka Aile" :inherit outline-4 :height 1.25 :weight bold))))
+  (org-level-3 ((t (:font "Iosevka Aile" :inherit outline-3 :height 1.3 :weight bold))))
   (org-level-2 ((t (:font "Iosevka Aile" :inherit outline-2 :height 1.4 :weight bold))))
   (org-level-1 ((t (:font "Iosevka Aile" :inherit outline-1 :height 1.5 :weight bold))))
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
