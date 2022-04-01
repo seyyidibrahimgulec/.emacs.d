@@ -224,6 +224,56 @@
   :commands turkish-mode turkish-correct-region turkish-asciify-region)
 
 (defun efs/display-startup-time ()
+
+(defun ig/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1))
+;; (auto-fill-mode 0)
+;;(visual-line-mode 1))
+
+(use-package org
+  :straight (:type built-in)
+  :hook (org-mode . ig/org-mode-setup)
+  :custom
+  (org-ellipsis " ⤵") ;; ↴, ▼, ▶, ⤵
+  (org-hide-emphasis-markers t)
+  (org-agenda-files `(,(expand-file-name "agenda.org" org-directory)))
+  :custom-face
+  (org-document-title ((t (:font "Iosevka Aile" :height 1.5 :weight bold))))
+  (org-level-7 ((t (:font "Iosevka Aile" :inherit outline-7 :height 1.1 :weight bold))))
+  (org-level-6 ((t (:font "Iosevka Aile" :inherit outline-6 :height 1.1 :weight bold))))
+  (org-level-5 ((t (:font "Iosevka Aile" :inherit outline-5 :height 1.2 :weight bold))))
+  (org-level-4 ((t (:font "Iosevka Aile" :inherit outline-4 :height 1.28 :weight bold))))
+  (org-level-3 ((t (:font "Iosevka Aile" :inherit outline-3 :height 1.33 :weight bold))))
+  (org-level-2 ((t (:font "Iosevka Aile" :inherit outline-2 :height 1.4 :weight bold))))
+  (org-level-1 ((t (:font "Iosevka Aile" :inherit outline-1 :height 1.5 :weight bold))))
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (org-block ((t (:foreground nil :inherit fixed-pitch))))
+  (org-table ((t (:inherit fixed-pitch))))
+  (org-formula ((t (:inherit fixed-pitch))))
+  (org-code ((t (:inherit (shadow fixed-pitch)))))
+  (org-table ((t (:inherit (shadow fixed-pitch)))))
+  ;; (org-indent ((t (:inherit (org-hide fixed-pitch)))))
+  (org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+  (org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+  (org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+  (org-checkbox ((t (:inherit (fixed-pitch org-todo))))))
+
+(use-package org-superstar
+  :after org
+  :hook (org-mode . org-superstar-mode)
+  :custom
+  (org-superstar-remove-leading-stars t)
+  (org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(defun ig/org-mode-visual-fill ()
+  (setq visual-fill-column-width 110
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :defer t
+  :hook (org-mode . ig/org-mode-visual-fill))
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
                    (float-time
