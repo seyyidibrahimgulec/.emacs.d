@@ -23,7 +23,7 @@
   :defer t
   :init (load-theme 'doom-snazzy t))
 
-(set-face-attribute 'default nil :font "Fira Code")
+;; (set-face-attribute 'default nil :font "Fira Code")
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
@@ -34,6 +34,10 @@
 (setq ring-bell-function 'ignore) ; prevent beep sound.
 (setq require-final-newline t) ; Add new line end of the file
 (setq truncate-lines t)
+(setq-default fill-column 80
+              sentence-end-double-space nil
+              indent-tabs-mode nil  ; Use spaces instead of tabs
+              tab-width 4)
 
 ;; Modes
 (global-display-line-numbers-mode -1)
@@ -45,6 +49,7 @@
 (global-auto-revert-mode 1)
 (blink-cursor-mode -1)
 (delete-selection-mode 1)
+(electric-pair-mode 1)
 ;; (setq global-auto-revert-non-file-buffers t)
 ;; (recentf-mode 1)
 ;; (savehist-mode 1)
@@ -274,10 +279,12 @@
 (use-package visual-fill-column
   :defer t
   :hook (org-mode . ig/org-mode-visual-fill))
+
+(defun ig/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
                    (float-time
                     (time-subtract after-init-time before-init-time)))
            gcs-done))
 
-(add-hook 'emacs-startup-hook #'efs/display-startup-time)
+(add-hook 'emacs-startup-hook #'ig/display-startup-time)
