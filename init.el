@@ -65,7 +65,7 @@
 ;; source: spacemacs' better default layer
 (defun backward-kill-word-or-region ()
   "Calls `kill-region' when a region is active and
-	  `backward-kill-word' otherwise."
+      `backward-kill-word' otherwise."
   (interactive)
   (if (region-active-p)
       (call-interactively 'kill-region)
@@ -105,7 +105,7 @@
 (use-package expand-region
   :init
   (setq expand-region-fast-keys-enabled nil
-	expand-region-subword-enabled t)
+    expand-region-subword-enabled t)
   :bind (("C-t" . er/expand-region)))
 
 ;; Projectile
@@ -138,10 +138,10 @@
 (use-package counsel
   :demand t
   :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history)))
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history)))
 
 (use-package ivy-rich
   :init
@@ -203,8 +203,8 @@
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
-			 (require 'lsp-pyright)
-			 (lsp))))
+                         (require 'lsp-pyright)
+                         (lsp))))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
