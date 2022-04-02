@@ -166,6 +166,12 @@
   :config
   (ivy-prescient-mode 1))
 
+(use-package flx  ;; Improves sorting for fuzzy-matched results
+  :after ivy
+  :defer t
+  :init
+  (setq ivy-flx-limit 10000))
+
 (use-package winner
   :bind
   (("M-u" . winner-undo)
