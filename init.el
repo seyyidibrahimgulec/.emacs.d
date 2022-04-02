@@ -107,9 +107,9 @@
 
 ;; Expand Region
 (use-package expand-region
-  :init
-  (setq expand-region-fast-keys-enabled nil
-    expand-region-subword-enabled t)
+  :custom
+  (expand-region-fast-keys-enabled nil)
+  (expand-region-subword-enabled t)
   :bind (("C-t" . er/expand-region)))
 
 ;; Projectile
