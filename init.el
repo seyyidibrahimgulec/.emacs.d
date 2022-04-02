@@ -156,6 +156,10 @@
   (ivy-rich-mode 1)
   :after counsel)
 
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
 (use-package prescient
   :after counsel
   :config
