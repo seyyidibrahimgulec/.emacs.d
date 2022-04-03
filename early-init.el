@@ -10,4 +10,3 @@
             ;; Set a reasonable value that won't hang Emacs or won't increase ram usage
             (setq gc-cons-threshold (* 50 1000 1000)))
           100)  ; Make sure this function will run at the end of `emacs-startup-hook's.
-
