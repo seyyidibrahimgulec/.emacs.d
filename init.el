@@ -50,6 +50,7 @@
 (blink-cursor-mode -1)
 (delete-selection-mode 1)
 (electric-pair-mode 1)
+(pixel-scroll-precision-mode 1)
 ;; (setq global-auto-revert-non-file-buffers t)
 ;; (recentf-mode 1)
 ;; (savehist-mode 1)
