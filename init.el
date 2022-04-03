@@ -314,6 +314,14 @@
   :defer t
   :hook (org-mode . ig/org-mode-visual-fill))
 
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode)
+  :config
+  (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
+
 (defun ig/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
