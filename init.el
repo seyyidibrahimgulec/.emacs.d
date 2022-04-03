@@ -260,6 +260,37 @@
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
 
+(use-package web-mode
+  :custom
+  (css-indent-offset 2)
+  (web-mode-markup-indent-offset 2)
+  (web-mode-enable-auto-indentation nil)
+  (web-mode-enable-auto-pairing nil)
+  (web-mode-engines-alist '(("django" . "\\.html\\'")))
+  :mode ;; Copied from spacemacs
+  (("\\.phtml\\'"      . web-mode)
+   ("\\.tpl\\.php\\'"  . web-mode)
+   ("\\.twig\\'"       . web-mode)
+   ("\\.xml\\'"        . web-mode)
+   ("\\.html\\'"       . web-mode)
+   ("\\.htm\\'"        . web-mode)
+   ("\\.[gj]sp\\'"     . web-mode)
+   ("\\.as[cp]x?\\'"   . web-mode)
+   ("\\.eex\\'"        . web-mode)
+   ("\\.erb\\'"        . web-mode)
+   ("\\.mustache\\'"   . web-mode)
+   ("\\.handlebars\\'" . web-mode)
+   ("\\.hbs\\'"        . web-mode)
+   ("\\.eco\\'"        . web-mode)
+   ("\\.ejs\\'"        . web-mode)
+   ("\\.svelte\\'"     . web-mode)
+   ("\\.djhtml\\'"     . web-mode)
+   ("\\.mjml\\'"       . web-mode)))
+
+(use-package company-web
+  :after web-mode
+  :config
+  (add-to-list 'company-backends '(company-web-html :with company-yasnippet)))
 (use-package xwidget
   :straight (:type built-in)
   :commands xwidget-webkit-browse-url)
