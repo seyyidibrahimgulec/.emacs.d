@@ -23,7 +23,7 @@
   :defer t
   :init (load-theme 'doom-snazzy t))
 
-;; (set-face-attribute 'default nil :font "Fira Code")
+(set-face-attribute 'default nil :font "Roboto Mono" :height 90)
 (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
