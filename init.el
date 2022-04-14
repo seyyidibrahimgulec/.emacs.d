@@ -227,6 +227,22 @@
 (use-package python
   :straight (:type built-in))
 
+(use-package pyvenv
+  :after python
+  :config
+  (defun ig/pyvenv-autoload ()
+    (interactive)
+    "auto activate venv directory if exists"
+    (f-traverse-upwards (lambda (path)
+                          (let ((venv-path (f-expand "venv" path)))
+                            (when (f-exists? venv-path)
+                              (pyvenv-activate venv-path))))))
+
+  (add-hook 'python-mode-hook 'ig/pyvenv-autoload))
+
+(use-package blacken
+  :commands blacken-mode blacken-buffer)
+
 (use-package flycheck
   :defer t
   :hook (lsp-mode . flycheck-mode)
@@ -260,6 +276,7 @@
 
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
+
 
 (use-package web-mode
   :custom
@@ -354,6 +371,25 @@
 
 (use-package yasnippet-snippets
   :after yasnippet)
+
+(use-package haskell-mode)
+
+(use-package screenshot
+  :straight (:host github :repo "tecosaur/screenshot")
+  :commands screenshot
+  :custom
+  (screenshot-max-width 300)
+  :hook
+  (screenshot-buffer-creation . (lambda () (hl-line-mode -1))))
+
+(use-package docker
+  :commands docker)
+
+(use-package dockerfile-mode
+  :mode "Dockerfile\\'")
+
+(use-package docker-compose-mode
+  :mode "docker-compose\\'")
 
 (defun ig/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
