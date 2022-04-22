@@ -66,6 +66,11 @@
 ;;       mac-command-modifier 'meta
 ;;       mac-option-modifier 'none)
 
+(defun kill-all-buffers ()
+  "Kill all buffers."
+  (interactive)
+  (mapc 'kill-buffer (buffer-list)))
+
 ;; Some Extra Keybindings
 ;; source: spacemacs' better default layer
 (defun backward-kill-word-or-region ()
