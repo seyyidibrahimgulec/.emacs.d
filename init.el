@@ -329,6 +329,7 @@
   :straight (:type built-in)
   :hook (org-mode . ig/org-mode-setup)
   :custom
+  (org-confirm-babel-evaluate nil)
   (org-ellipsis " ↴") ;; ↴, ▼, ▶, ⤵
   (org-hide-emphasis-markers t)
   (org-agenda-files `(,(expand-file-name "agenda.org" org-directory)))
@@ -356,6 +357,13 @@
   (org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
   (org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
   (org-checkbox ((t (:inherit (fixed-pitch org-todo))))))
+
+(use-package org-tempo
+  :straight (:type built-in)
+  :config
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 (use-package org-superstar
   :after org
