@@ -4,12 +4,33 @@
 - [[#package-management][Package Management]]
 - [[#performance-optimization][Performance Optimization]]
 - [[#general][General]]
-- [[#packages][Packages]]
-  - [[#beacon][Beacon]]
-  - [[#git-link][Git Link]]
-  - [[#aggressive-indent][Aggressive Indent]]
-  - [[#multiple-cursors][Multiple Cursors]]
-  - [[#expand-region][Expand Region]]
+- [[#org-mode][Org Mode]]
+  - [[#org][Org]]
+  - [[#org-tempo][Org Tempo]]
+  - [[#org-superstar][Org Superstar]]
+  - [[#visual-fill-column][Visual Fill Column]]
+  - [[#org-toc][Org Toc]]
+  - [[#org-roam][Org Roam]]
+  - [[#org-roam-ui][Org Roam Ui]]
+- [[#programming][Programming]]
+  - [[#general-1][General]]
+    - [[#company][Company]]
+    - [[#yaml-mode][Yaml-Mode]]
+    - [[#web-mode][Web Mode]]
+    - [[#yasnippet][Yasnippet]]
+    - [[#yasnippet-snippets][Yasnippet Snippets]]
+    - [[#company-web][Company Web]]
+    - [[#flycheck][Flycheck]]
+  - [[#programming-languages][Programming Languages]]
+    - [[#go][Go]]
+    - [[#emacs-lisp][Emacs Lisp]]
+      - [[#aggressive-indent][Aggressive Indent]]
+    - [[#python][Python]]
+      - [[#lsp-pyright][Lsp Pyright]]
+      - [[#pyvenv][Pyvenv]]
+      - [[#blacken][Blacken]]
+    - [[#haskell][Haskell]]
+- [[#ivy-and-counsel][Ivy and Counsel]]
   - [[#projectile][Projectile]]
   - [[#counsel-projectile][Counsel Projectile]]
   - [[#ivy][Ivy]]
@@ -19,44 +40,37 @@
   - [[#prescient][Prescient]]
   - [[#ivy-prescient][Ivy Prescient]]
   - [[#flx][Flx]]
-  - [[#winner][Winner]]
+- [[#docker][Docker]]
+  - [[#docker-1][Docker]]
+  - [[#dockerfile-mode][Dockerfile Mode]]
+  - [[#docker-compose-mode][Docker Compose Mode]]
+- [[#lsp][Lsp]]
+  - [[#lsp-mode][Lsp Mode]]
+  - [[#lsp-ui][Lsp Ui]]
+- [[#appearance][Appearance]]
+  - [[#font][Font]]
+  - [[#theme][Theme]]
   - [[#minions][Minions]]
+  - [[#rainbow-delimiters][Rainbow Delimiters]]
   - [[#doom-modeline][Doom Modeline]]
   - [[#all-the-icons][All The Icons]]
   - [[#all-the-icons-dired][All The Icons Dired]]
+  - [[#beacon][Beacon]]
+- [[#text-editing][Text Editing]]
+  - [[#general-2][General]]
+  - [[#multiple-cursors][Multiple Cursors]]
+  - [[#expand-region][Expand Region]]
+- [[#version-control][Version Control]]
   - [[#magit][Magit]]
+  - [[#git-link][Git Link]]
+- [[#extra-tools][Extra Tools]]
+  - [[#winner][Winner]]
   - [[#which-key][Which Key]]
-  - [[#lsp-mode][Lsp Mode]]
-  - [[#lsp-ui][Lsp Ui]]
-  - [[#lsp-pyright][Lsp Pyright]]
-  - [[#go-mode][Go Mode]]
-  - [[#python][Python]]
-  - [[#pyvenv][Pyvenv]]
-  - [[#blacken][Blacken]]
-  - [[#flycheck][Flycheck]]
-  - [[#company][Company]]
-  - [[#rainbow-delimiters][Rainbow Delimiters]]
   - [[#helpful][Helpful]]
   - [[#turkish][Turkish]]
   - [[#sozluk][Sozluk]]
-  - [[#yaml-mode][Yaml-Mode]]
-  - [[#web-mode][Web Mode]]
-  - [[#company-web][Company Web]]
   - [[#xwidget][Xwidget]]
-  - [[#org][Org]]
-  - [[#org-tempo][Org Tempo]]
-  - [[#org-superstar][Org Superstar]]
-  - [[#visual-fill-column][Visual Fill Column]]
-  - [[#org-toc][Org Toc]]
-  - [[#org-roam][Org Roam]]
-  - [[#org-roam-ui][Org Roam Ui]]
-  - [[#yasnippet][Yasnippet]]
-  - [[#yasnippet-snippets][Yasnippet Snippets]]
-  - [[#haskell-mode][Haskell Mode]]
   - [[#screenshot][Screenshot]]
-  - [[#docker][Docker]]
-  - [[#dockerfile-mode][Dockerfile Mode]]
-  - [[#docker-compose-mode][Docker Compose Mode]]
 - [[#references][References]]
 
 * Applying Changes
@@ -140,14 +154,6 @@
   (use-package no-littering)
   (setq create-lockfiles nil)
 
-  (use-package doom-themes
-    :defer t
-    :init (load-theme 'doom-snazzy t))
-
-  (set-face-attribute 'default nil :font "Roboto Mono" :height 90)
-  (set-frame-parameter (selected-frame) 'alpha '(80 . 80))
-  (add-to-list 'default-frame-alist '(alpha . (80 . 80)))
-
   (setq user-full-name "Seyyid İbrahim Güleç"
         user-mail-address "seyyidibrahimgulec@gmail.com")
 
@@ -193,22 +199,6 @@
     (interactive)
     (mapc 'kill-buffer (buffer-list)))
 
-  ;; Some Extra Keybindings
-  ;; source: spacemacs' better default layer
-  (defun backward-kill-word-or-region ()
-    "Calls `kill-region' when a region is active and
-            `backward-kill-word' otherwise."
-    (interactive)
-    (if (region-active-p)
-        (call-interactively 'kill-region)
-      (backward-kill-word 1)))
-
-  (global-set-key (kbd "C-w") 'backward-kill-word-or-region)
-
-  ;; Use shell-like backspace C-h, rebind help to C-?
-  (keyboard-translate ?\C-h ?\C-?)
-  (global-set-key (kbd "C-?") 'help-command)
-
   (defun ig/display-startup-time ()
     (message "Emacs loaded in %s with %d garbage collections."
              (format "%.2f seconds"
@@ -218,324 +208,7 @@
 
   (add-hook 'emacs-startup-hook #'ig/display-startup-time)
 #+end_src
-
-* Packages
-** Beacon
-#+begin_src emacs-lisp :tangle config.el
-  (use-package beacon
-    :config
-    (beacon-mode 1))
-#+end_src
-
-** Git Link
-#+begin_src emacs-lisp :tangle config.el
-  (use-package git-link
-    :commands git-link)
-#+end_src
-
-** Aggressive Indent
-#+begin_src emacs-lisp :tangle config.el
-  (use-package aggressive-indent
-    :hook (emacs-lisp-mode . aggressive-indent-mode))
-#+end_src
-
-** Multiple Cursors
-#+begin_src emacs-lisp :tangle config.el
-  ;; Multiple Cursors
-  (use-package multiple-cursors
-    :custom
-    (mc/always-run-for-all t)
-    :bind*
-    (("C-M-n" . mc/mark-next-like-this)
-     ("C-M-p" . mc/mark-previous-like-this)
-     ("C-M-S-n" . mc/skip-to-next-like-this)
-     ("C-M-S-p" . mc/skip-to-previous-like-this)
-     ("C-S-n" . mc/unmark-previous-like-this)
-     ("C-S-p" . mc/unmark-next-like-this)
-     ("C-M-<mouse-1>" . mc/add-cursor-on-click)))
-#+end_src
-
-** Expand Region
-#+begin_src emacs-lisp :tangle config.el
-  ;; Expand Region
-  (use-package expand-region
-    :custom
-    (expand-region-fast-keys-enabled nil)
-    (expand-region-subword-enabled t)
-    :bind (("C-t" . er/expand-region)))
-#+end_src
-
-** Projectile
-#+begin_src emacs-lisp :tangle config.el
-  ;; Projectile
-  (use-package projectile
-    :config (projectile-mode)
-    :demand t
-    :bind-keymap
-    ("C-c p" . projectile-command-map)
-    :init
-    (setq projectile-switch-project-action #'projectile-dired))
-#+end_src
-
-** Counsel Projectile
-#+begin_src emacs-lisp :tangle config.el
-  ;; Counsel Projectile
-  (use-package counsel-projectile
-    :after projectile
-    :bind (("C-x f" . counsel-projectile-find-file))
-    :config
-    (counsel-projectile-mode))
-#+end_src
-
-** Ivy
-#+begin_src emacs-lisp :tangle config.el
-  (use-package ivy
-    :bind (("C-s" . swiper))
-    ;; :map ivy-minibuffer-map
-    ;; ("TAB" . ivy-alt-done)
-    ;; ("C-e" . ivy-alt-done))
-    :init
-    (ivy-mode 1)
-    :custom-face
-    (ivy-current-match ((t (:extend t))))
-    :config
-    (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line) ;; to extend ivy line
-    :custom
-    (ivy-format-function 'ivy-format-function-line)
-    (ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
-#+end_src
-
-** Counsel
-#+begin_src emacs-lisp :tangle config.el
-  (use-package counsel
-    :demand t
-    :bind (("M-x" . counsel-M-x)
-           ("C-x b" . counsel-ibuffer)
-           ("C-x C-f" . counsel-find-file)
-           :map minibuffer-local-map
-           ("C-r" . 'counsel-minibuffer-history)))
-#+end_src
-
-** Ivy Rich
-#+begin_src emacs-lisp :tangle config.el
-  (use-package ivy-rich
-    :init
-    (ivy-rich-mode 1)
-    :after counsel)
-#+end_src
-** All The Icons Ivy Rich
-#+begin_src emacs-lisp :tangle config.el
-  (use-package all-the-icons-ivy-rich
-    :ensure t
-    :init (all-the-icons-ivy-rich-mode 1))
-#+end_src
-** Prescient
-#+begin_src emacs-lisp :tangle config.el
-  (use-package prescient
-    :after counsel
-    :config
-    (prescient-persist-mode 1))
-#+end_src
-** Ivy Prescient
-#+begin_src emacs-lisp :tangle config.el
-  (use-package ivy-prescient
-    :after prescient
-    :config
-    (ivy-prescient-mode 1))
-#+end_src
-** Flx
-#+begin_src emacs-lisp :tangle config.el
-  (use-package flx  ;; Improves sorting for fuzzy-matched results
-    :after ivy
-    :defer t
-    :init
-    (setq ivy-flx-limit 10000))
-#+end_src
-** Winner
-#+begin_src emacs-lisp :tangle config.el
-  (use-package winner
-    :bind
-    (("M-u" . winner-undo)
-     ("M-U" . winner-redo))
-    :config
-    (winner-mode))
-#+end_src
-** Minions
-#+begin_src emacs-lisp :tangle config.el
-  (use-package minions
-    :hook (doom-modeline-mode . minions-mode))
-#+end_src
-** Doom Modeline
-#+begin_src emacs-lisp :tangle config.el
-  (use-package doom-modeline
-    :config
-    (doom-modeline-mode)
-    :custom
-    (doom-modeline-minor-modes t))
-#+end_src
-** All The Icons
-#+begin_src emacs-lisp :tangle config.el
-  (use-package all-the-icons)
-#+end_src
-** All The Icons Dired
-#+begin_src emacs-lisp :tangle config.el
-  (use-package all-the-icons-dired
-    :hook (dired-mode . all-the-icons-dired-mode))
-#+end_src
-** Magit
-#+begin_src emacs-lisp :tangle config.el
-  (use-package magit
-    :commands magit)
-#+end_src
-** Which Key
-#+begin_src emacs-lisp :tangle config.el
-  (use-package which-key
-    :init (which-key-mode)
-    :custom
-    (which-key-idle-delay 0.3))
-#+end_src
-** Lsp Mode
-#+begin_src emacs-lisp :tangle config.el
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-    :custom
-    (lsp-headerline-breadcrumb-enable nil)
-    (lsp-diagnostics-provider :none) ;; To disable default lsp flycheck
-    (lsp-file-watch-threshold 10000))
-#+end_src
-** Lsp Ui
-#+begin_src emacs-lisp :tangle config.el
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode)
-    :custom
-    (lsp-ui-doc-show-with-cursor nil)
-    (lsp-ui-doc-show-with-mouse nil))
-#+end_src
-** Lsp Pyright
-#+begin_src emacs-lisp :tangle config.el
-  (use-package lsp-pyright
-    :hook (python-mode . lsp-deferred))
-#+end_src
-** Go Mode
-#+begin_src emacs-lisp :tangle config.el
-  (use-package go-mode
-    :hook (go-mode . lsp-deferred))
-#+end_src
-** Python
-#+begin_src emacs-lisp :tangle config.el
-  (use-package python
-    :straight (:type built-in))
-#+end_src
-** Pyvenv
-#+begin_src emacs-lisp :tangle config.el
-  (use-package pyvenv
-    :after python
-    :config
-    (defun ig/pyvenv-autoload ()
-      (interactive)
-      "auto activate venv directory if exists"
-      (f-traverse-upwards (lambda (path)
-                            (let ((venv-path (f-expand "venv" path)))
-                              (when (f-exists? venv-path)
-                                (pyvenv-activate venv-path))))))
-
-    (add-hook 'python-mode-hook 'ig/pyvenv-autoload))
-#+end_src
-** Blacken
-#+begin_src emacs-lisp :tangle config.el
-  (use-package blacken
-    :commands blacken-mode blacken-buffer)
-#+end_src
-** Flycheck
-#+begin_src emacs-lisp :tangle config.el
-  (use-package flycheck
-    :defer t
-    :hook (lsp-mode . flycheck-mode)
-    :custom
-    (flycheck-checker-error-threshold 1000))
-#+end_src
-** Company
-#+begin_src emacs-lisp :tangle config.el
-  (use-package company
-    :custom
-    (company-idle-delay 0))
-#+end_src
-** Rainbow Delimiters
-#+begin_src emacs-lisp :tangle config.el
-  (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode))
-#+end_src
-** Helpful
-#+begin_src emacs-lisp :tangle config.el
-  (use-package helpful
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
-    :bind
-    ([remap describe-function] . helpful-function)
-    ([remap describe-symbol] . helpful-symbol)
-    ([remap describe-variable] . counsel-describe-variable)
-    ([remap describe-command] . helpful-command)
-    ([remap describe-key] . helpful-key))
-#+end_src
-** Turkish
-#+begin_src emacs-lisp :tangle config.el
-  (use-package turkish
-    :commands turkish-mode turkish-correct-region turkish-asciify-region)
-#+end_src
-** Sozluk
-#+begin_src emacs-lisp :tangle config.el
-  (use-package sozluk
-    :straight (:host github :repo "isamert/sozluk.el")
-    :commands sozluk)
-#+end_src
-** Yaml-Mode
-#+begin_src emacs-lisp :tangle config.el
-  (use-package yaml-mode
-    :mode "\\.ya?ml\\'")
-#+end_src
-** Web Mode
-#+begin_src emacs-lisp :tangle config.el
-  (use-package web-mode
-    :custom
-    (css-indent-offset 2)
-    (web-mode-markup-indent-offset 2)
-    (web-mode-enable-auto-indentation nil)
-    (web-mode-enable-auto-pairing nil)
-    (web-mode-engines-alist '(("django" . "\\.html\\'")))
-    :mode ;; Copied from spacemacs
-    (("\\.phtml\\'"      . web-mode)
-     ("\\.tpl\\.php\\'"  . web-mode)
-     ("\\.twig\\'"       . web-mode)
-     ("\\.xml\\'"        . web-mode)
-     ("\\.html\\'"       . web-mode)
-     ("\\.htm\\'"        . web-mode)
-     ("\\.[gj]sp\\'"     . web-mode)
-     ("\\.as[cp]x?\\'"   . web-mode)
-     ("\\.eex\\'"        . web-mode)
-     ("\\.erb\\'"        . web-mode)
-     ("\\.mustache\\'"   . web-mode)
-     ("\\.handlebars\\'" . web-mode)
-     ("\\.hbs\\'"        . web-mode)
-     ("\\.eco\\'"        . web-mode)
-     ("\\.ejs\\'"        . web-mode)
-     ("\\.svelte\\'"     . web-mode)
-     ("\\.djhtml\\'"     . web-mode)
-     ("\\.mjml\\'"       . web-mode)))
-#+end_src
-** Company Web
-#+begin_src emacs-lisp :tangle config.el
-  (use-package company-web
-    :after web-mode
-    :config
-    (add-to-list 'company-backends '(company-web-html :with company-yasnippet)))
-#+end_src
-** Xwidget
-#+begin_src emacs-lisp :tangle config.el
-  (use-package xwidget
-    :straight (:type built-in)
-    :commands xwidget-webkit-browse-url)
-#+end_src
+* Org Mode
 ** Org
 #+begin_src emacs-lisp :tangle config.el
   (defun ig/org-mode-setup ()
@@ -643,32 +316,206 @@
     (org-roam-ui-update-on-save t)
     (org-roam-ui-open-on-start t))
 #+end_src
-** Yasnippet
+* Programming
+** General
+*** Company
+#+begin_src emacs-lisp :tangle config.el
+  (use-package company
+    :custom
+    (company-idle-delay 0))
+#+end_src
+*** Yaml-Mode
+#+begin_src emacs-lisp :tangle config.el
+  (use-package yaml-mode
+    :mode "\\.ya?ml\\'")
+#+end_src
+*** Web Mode
+#+begin_src emacs-lisp :tangle config.el
+  (use-package web-mode
+    :custom
+    (css-indent-offset 2)
+    (web-mode-markup-indent-offset 2)
+    (web-mode-enable-auto-indentation nil)
+    (web-mode-enable-auto-pairing nil)
+    (web-mode-engines-alist '(("django" . "\\.html\\'")))
+    :mode ;; Copied from spacemacs
+    (("\\.phtml\\'"      . web-mode)
+     ("\\.tpl\\.php\\'"  . web-mode)
+     ("\\.twig\\'"       . web-mode)
+     ("\\.xml\\'"        . web-mode)
+     ("\\.html\\'"       . web-mode)
+     ("\\.htm\\'"        . web-mode)
+     ("\\.[gj]sp\\'"     . web-mode)
+     ("\\.as[cp]x?\\'"   . web-mode)
+     ("\\.eex\\'"        . web-mode)
+     ("\\.erb\\'"        . web-mode)
+     ("\\.mustache\\'"   . web-mode)
+     ("\\.handlebars\\'" . web-mode)
+     ("\\.hbs\\'"        . web-mode)
+     ("\\.eco\\'"        . web-mode)
+     ("\\.ejs\\'"        . web-mode)
+     ("\\.svelte\\'"     . web-mode)
+     ("\\.djhtml\\'"     . web-mode)
+     ("\\.mjml\\'"       . web-mode)))
+#+end_src
+*** Yasnippet
 #+begin_src emacs-lisp :tangle config.el
   (use-package yasnippet
     :hook (prog-mode . yas-minor-mode)
     :config
     (yas-reload-all))
 #+end_src
-** Yasnippet Snippets
+*** Yasnippet Snippets
 #+begin_src emacs-lisp :tangle config.el
   (use-package yasnippet-snippets
     :after yasnippet)
 #+end_src
-** Haskell Mode
+*** Company Web
+#+begin_src emacs-lisp :tangle config.el
+  (use-package company-web
+    :after web-mode
+    :config
+    (add-to-list 'company-backends '(company-web-html :with company-yasnippet)))
+#+end_src
+*** Flycheck
+#+begin_src emacs-lisp :tangle config.el
+  (use-package flycheck
+    :defer t
+    :hook (lsp-mode . flycheck-mode)
+    :custom
+    (flycheck-checker-error-threshold 1000))
+#+end_src
+** Programming Languages
+*** Go
+#+begin_src emacs-lisp :tangle config.el
+  (use-package go-mode
+    :hook (go-mode . lsp-deferred))
+#+end_src
+*** Emacs Lisp
+**** Aggressive Indent
+#+begin_src emacs-lisp :tangle config.el
+  (use-package aggressive-indent
+    :hook (emacs-lisp-mode . aggressive-indent-mode))
+#+end_src
+*** Python
+#+begin_src emacs-lisp :tangle config.el
+  (use-package python
+    :straight (:type built-in))
+#+end_src
+**** Lsp Pyright
+#+begin_src emacs-lisp :tangle config.el
+  (use-package lsp-pyright
+    :hook (python-mode . lsp-deferred))
+#+end_src
+
+**** Pyvenv
+#+begin_src emacs-lisp :tangle config.el
+  (use-package pyvenv
+    :after python
+    :config
+    (defun ig/pyvenv-autoload ()
+      (interactive)
+      "auto activate venv directory if exists"
+      (f-traverse-upwards (lambda (path)
+                            (let ((venv-path (f-expand "venv" path)))
+                              (when (f-exists? venv-path)
+                                (pyvenv-activate venv-path))))))
+
+    (add-hook 'python-mode-hook 'ig/pyvenv-autoload))
+#+end_src
+**** Blacken
+#+begin_src emacs-lisp :tangle config.el
+  (use-package blacken
+    :commands blacken-mode blacken-buffer)
+#+end_src
+*** Haskell
 #+begin_src emacs-lisp :tangle config.el
   (use-package haskell-mode)
 #+end_src
-** Screenshot
+* Ivy and Counsel
+** Projectile
 #+begin_src emacs-lisp :tangle config.el
-  (use-package screenshot
-    :straight (:host github :repo "tecosaur/screenshot")
-    :commands screenshot
-    :custom
-    (screenshot-max-width 300)
-    :hook
-    (screenshot-buffer-creation . (lambda () (hl-line-mode -1))))
+  ;; Projectile
+  (use-package projectile
+    :config (projectile-mode)
+    :demand t
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+    (setq projectile-switch-project-action #'projectile-dired))
 #+end_src
+** Counsel Projectile
+#+begin_src emacs-lisp :tangle config.el
+  ;; Counsel Projectile
+  (use-package counsel-projectile
+    :after projectile
+    :bind (("C-x f" . counsel-projectile-find-file))
+    :config
+    (counsel-projectile-mode))
+#+end_src
+** Ivy
+#+begin_src emacs-lisp :tangle config.el
+  (use-package ivy
+    :bind (("C-s" . swiper))
+    ;; :map ivy-minibuffer-map
+    ;; ("TAB" . ivy-alt-done)
+    ;; ("C-e" . ivy-alt-done))
+    :init
+    (ivy-mode 1)
+    :custom-face
+    (ivy-current-match ((t (:extend t))))
+    :config
+    (setcdr (assoc t ivy-format-functions-alist) #'ivy-format-function-line) ;; to extend ivy line
+    :custom
+    (ivy-format-function 'ivy-format-function-line)
+    (ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
+#+end_src
+** Counsel
+#+begin_src emacs-lisp :tangle config.el
+  (use-package counsel
+    :demand t
+    :bind (("M-x" . counsel-M-x)
+           ("C-x b" . counsel-ibuffer)
+           ("C-x C-f" . counsel-find-file)
+           :map minibuffer-local-map
+           ("C-r" . 'counsel-minibuffer-history)))
+#+end_src
+** Ivy Rich
+#+begin_src emacs-lisp :tangle config.el
+  (use-package ivy-rich
+    :init
+    (ivy-rich-mode 1)
+    :after counsel)
+#+end_src
+** All The Icons Ivy Rich
+#+begin_src emacs-lisp :tangle config.el
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
+#+end_src
+** Prescient
+#+begin_src emacs-lisp :tangle config.el
+  (use-package prescient
+    :after counsel
+    :config
+    (prescient-persist-mode 1))
+#+end_src
+** Ivy Prescient
+#+begin_src emacs-lisp :tangle config.el
+  (use-package ivy-prescient
+    :after prescient
+    :config
+    (ivy-prescient-mode 1))
+#+end_src
+** Flx
+#+begin_src emacs-lisp :tangle config.el
+  (use-package flx  ;; Improves sorting for fuzzy-matched results
+    :after ivy
+    :defer t
+    :init
+    (setq ivy-flx-limit 10000))
+#+end_src
+* Docker
 ** Docker
 #+begin_src emacs-lisp :tangle config.el
   (use-package docker
@@ -683,6 +530,182 @@
 #+begin_src emacs-lisp :tangle config.el
   (use-package docker-compose-mode
     :mode "docker-compose\\'")
+#+end_src
+* Lsp
+** Lsp Mode
+#+begin_src emacs-lisp :tangle config.el
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :custom
+    (lsp-headerline-breadcrumb-enable nil)
+    (lsp-diagnostics-provider :none) ;; To disable default lsp flycheck
+    (lsp-file-watch-threshold 10000))
+#+end_src
+** Lsp Ui
+#+begin_src emacs-lisp :tangle config.el
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    :custom
+    (lsp-ui-doc-show-with-cursor nil)
+    (lsp-ui-doc-show-with-mouse nil))
+#+end_src
+* Appearance
+** Font
+#+begin_src emacs-lisp :tangle config.el
+  (set-face-attribute 'default nil :font "Roboto Mono" :height 90)
+#+end_src
+** Theme
+#+begin_src emacs-lisp :tangle config.el
+  (use-package doom-themes
+    :defer t
+    :init (load-theme 'doom-snazzy t))
+
+  (set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+  (add-to-list 'default-frame-alist '(alpha . (80 . 80)))
+#+end_src
+** Minions
+#+begin_src emacs-lisp :tangle config.el
+  (use-package minions
+    :hook (doom-modeline-mode . minions-mode))
+#+end_src
+** Rainbow Delimiters
+#+begin_src emacs-lisp :tangle config.el
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+** Doom Modeline
+#+begin_src emacs-lisp :tangle config.el
+  (use-package doom-modeline
+    :config
+    (doom-modeline-mode)
+    :custom
+    (doom-modeline-minor-modes t))
+#+end_src
+** All The Icons
+#+begin_src emacs-lisp :tangle config.el
+  (use-package all-the-icons)
+#+end_src
+** All The Icons Dired
+#+begin_src emacs-lisp :tangle config.el
+  (use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode))
+#+end_src
+** Beacon
+#+begin_src emacs-lisp :tangle config.el
+  (use-package beacon
+    :config
+    (beacon-mode 1))
+#+end_src
+* Text Editing
+** General
+#+begin_src emacs-lisp :tangle config.el
+  ;; Some Extra Keybindings
+  ;; source: spacemacs' better default layer
+  (defun backward-kill-word-or-region ()
+    "Calls `kill-region' when a region is active and
+            `backward-kill-word' otherwise."
+    (interactive)
+    (if (region-active-p)
+        (call-interactively 'kill-region)
+      (backward-kill-word 1)))
+
+  (global-set-key (kbd "C-w") 'backward-kill-word-or-region)
+
+  ;; Use shell-like backspace C-h, rebind help to C-?
+  (keyboard-translate ?\C-h ?\C-?)
+  (global-set-key (kbd "C-?") 'help-command)
+#+end_src
+** Multiple Cursors
+#+begin_src emacs-lisp :tangle config.el
+  ;; Multiple Cursors
+  (use-package multiple-cursors
+    :custom
+    (mc/always-run-for-all t)
+    :bind*
+    (("C-M-n" . mc/mark-next-like-this)
+     ("C-M-p" . mc/mark-previous-like-this)
+     ("C-M-S-n" . mc/skip-to-next-like-this)
+     ("C-M-S-p" . mc/skip-to-previous-like-this)
+     ("C-S-n" . mc/unmark-previous-like-this)
+     ("C-S-p" . mc/unmark-next-like-this)
+     ("C-M-<mouse-1>" . mc/add-cursor-on-click)))
+#+end_src
+** Expand Region
+#+begin_src emacs-lisp :tangle config.el
+  ;; Expand Region
+  (use-package expand-region
+    :custom
+    (expand-region-fast-keys-enabled nil)
+    (expand-region-subword-enabled t)
+    :bind (("C-t" . er/expand-region)))
+#+end_src
+* Version Control
+** Magit
+#+begin_src emacs-lisp :tangle config.el
+  (use-package magit
+    :commands magit)
+#+end_src
+** Git Link
+#+begin_src emacs-lisp :tangle config.el
+  (use-package git-link
+    :commands git-link)
+#+end_src
+* Extra Tools
+** Winner
+#+begin_src emacs-lisp :tangle config.el
+  (use-package winner
+    :bind
+    (("M-u" . winner-undo)
+     ("M-U" . winner-redo))
+    :config
+    (winner-mode))
+#+end_src
+** Which Key
+#+begin_src emacs-lisp :tangle config.el
+  (use-package which-key
+    :init (which-key-mode)
+    :custom
+    (which-key-idle-delay 0.3))
+#+end_src
+** Helpful
+#+begin_src emacs-lisp :tangle config.el
+  (use-package helpful
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . helpful-function)
+    ([remap describe-symbol] . helpful-symbol)
+    ([remap describe-variable] . counsel-describe-variable)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-key] . helpful-key))
+#+end_src
+** Turkish
+#+begin_src emacs-lisp :tangle config.el
+  (use-package turkish
+    :commands turkish-mode turkish-correct-region turkish-asciify-region)
+#+end_src
+** Sozluk
+#+begin_src emacs-lisp :tangle config.el
+  (use-package sozluk
+    :straight (:host github :repo "isamert/sozluk.el")
+    :commands sozluk)
+#+end_src
+** Xwidget
+#+begin_src emacs-lisp :tangle config.el
+  (use-package xwidget
+    :straight (:type built-in)
+    :commands xwidget-webkit-browse-url)
+#+end_src
+** Screenshot
+#+begin_src emacs-lisp :tangle config.el
+  (use-package screenshot
+    :straight (:host github :repo "tecosaur/screenshot")
+    :commands screenshot
+    :custom
+    (screenshot-max-width 300)
+    :hook
+    (screenshot-buffer-creation . (lambda () (hl-line-mode -1))))
 #+end_src
 * References
 - [[https://github.com/KaratasFurkan/.emacs.d][https://github.com/KaratasFurkan/.emacs.d]]
