@@ -1,4 +1,4 @@
-#+title Personal Emacs Configuration
+#+title: Personal Emacs Configuration
 
 * Personal Emacs Configuration
 ** Applying Changes
