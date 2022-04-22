@@ -24,8 +24,7 @@
   :init (load-theme 'doom-snazzy t))
 
 (set-face-attribute 'default nil :font "Roboto Mono" :height 90)
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'alpha '(70 . 70))
 
 (setq user-full-name "Seyyid İbrahim Güleç"
       user-mail-address "seyyidibrahimgulec@gmail.com")
