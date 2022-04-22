@@ -5,3 +5,5 @@ var/
 etc/
 eln-cache
 elpa/
+config.el
+early-init.el
