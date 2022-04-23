@@ -193,6 +193,9 @@
   (setq custom-file (locate-user-emacs-file "custom-vars.el"))
   (load custom-file 'noerror 'nomessage)
 
+  ;; Make sure to focus when a new emacsclient frame created.
+  (add-hook 'server-after-make-frame-hook (lambda () (select-frame-set-input-focus (selected-frame))))
+
   ;; Macos Key Bindings
   ;; (setq mac-option-key-is-meta nil
   ;;       mac-command-key-is-meta t
@@ -618,6 +621,8 @@
 
   ;; Use shell-like backspace C-h, rebind help to C-?
   (keyboard-translate ?\C-h ?\C-?)
+  ;; Fix emacs daemon
+  (add-hook 'server-after-make-frame-hook (lambda () (keyboard-translate ?\C-h ?\C-?)))
   (global-set-key (kbd "C-?") 'help-command)
 #+end_src
 ** Multiple Cursors
