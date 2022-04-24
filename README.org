@@ -564,7 +564,7 @@
 * Appearance
 ** Font
 #+begin_src emacs-lisp :tangle config.el
-  (set-face-attribute 'default nil :font "Roboto Mono" :height 90)
+  (set-face-attribute 'default nil :font "Roboto Mono" :height 100)
 #+end_src
 ** Theme
 #+begin_src emacs-lisp :tangle config.el
