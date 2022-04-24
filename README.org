@@ -76,6 +76,9 @@
   - [[#sozluk][Sozluk]]
   - [[#xwidget][Xwidget]]
   - [[#screenshot][Screenshot]]
+  - [[#restclient][Restclient]]
+    - [[#restclient-1][Restclient]]
+    - [[#company-restclient][Company Restclient]]
 - [[#references][References]]
 
 * Applying Changes
@@ -717,6 +720,20 @@
     (screenshot-max-width 300)
     :hook
     (screenshot-buffer-creation . (lambda () (hl-line-mode -1))))
+#+end_src
+** Restclient
+*** Restclient
+#+begin_src emacs-lisp :tangle config.el
+  (use-package restclient
+    :mode ("\\.http\\'" . restclient-mode))
+#+end_src
+*** Company Restclient
+#+begin_src emacs-lisp :tangle config.el
+  (use-package company-restclient
+    :after restclient
+    :hook
+    (restclient-mode . (lambda ()
+                         (add-to-list 'company-backends 'company-restclient))))
 #+end_src
 * References
 - [[https://github.com/KaratasFurkan/.emacs.d][https://github.com/KaratasFurkan/.emacs.d]]
