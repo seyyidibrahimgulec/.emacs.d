@@ -725,7 +725,7 @@
 ** Screenshot
 #+begin_src emacs-lisp :tangle config.el
   (use-package screenshot
-    :straight (:host github :repo "tecosaur/screenshot")
+    :straight (:host github :repo "tecosaur/screenshot" :build (:not compile))
     :commands screenshot
     :custom
     (screenshot-max-width 300)
