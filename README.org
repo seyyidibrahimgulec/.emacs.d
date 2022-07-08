@@ -36,6 +36,7 @@
       - [[#pyvenv][Pyvenv]]
       - [[#blacken][Blacken]]
     - [[#haskell][Haskell]]
+    - [[#solidity][Solidity]]
 - [[#ivy-and-counsel][Ivy and Counsel]]
   - [[#projectile][Projectile]]
   - [[#counsel-projectile][Counsel Projectile]]
@@ -454,6 +455,30 @@
 *** Haskell
 #+begin_src emacs-lisp :tangle config.el
   (use-package haskell-mode)
+#+end_src
+*** Solidity
+#+begin_src emacs-lisp :tangle config.el
+  (defun ig/solidity-mode-setup ()
+    (company-mode 1)
+    (flycheck-mode 1))
+
+  (use-package solidity-mode
+    :hook (solidity-mode . ig/solidity-mode-setup))
+
+  (use-package company-solidity
+    :after solidity-mode)
+
+  (use-package solidity-flycheck
+    :after solidity-mode
+    :init
+    (setq solidity-flycheck-solium-checker-active t)
+    (setq flycheck-solidity-solium-soliumrcfile "/home/ibrahim/.config/.soliumrc.json"))
+
+  (add-hook 'solidity-mode-hook
+            (lambda ()
+              (set (make-local-variable 'company-backends)
+                   (append '((company-solidity company-capf company-dabbrev-code))
+                           company-backends))))
 #+end_src
 * Ivy and Counsel
 ** Projectile
