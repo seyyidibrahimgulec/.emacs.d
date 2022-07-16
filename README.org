@@ -81,6 +81,7 @@
   - [[#restclient][Restclient]]
     - [[#restclient-1][Restclient]]
     - [[#company-restclient][Company Restclient]]
+  - [[#highlight-todos][Highlight TODOs]]
 - [[#references][References]]
 
 * Applying Changes
@@ -770,6 +771,12 @@
     :hook
     (restclient-mode . (lambda ()
                          (add-to-list 'company-backends 'company-restclient))))
+#+end_src
+** Highlight TODOs
+#+begin_src emacs-lisp :tangle config.el
+  (use-package hl-todo
+    :config
+    (global-hl-todo-mode 1))
 #+end_src
 * References
 - [[https://github.com/KaratasFurkan/.emacs.d][https://github.com/KaratasFurkan/.emacs.d]]
