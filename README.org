@@ -1,15 +1,13 @@
 #+title: Personal Emacs Configuration
 * Screenshots
-** Org Mode
 [[./screenshots/screenshot_01.png]]
 * Table Of Contents :TOC:
 - [[#screenshots][Screenshots]]
-  - [[#org-mode][Org Mode]]
 - [[#applying-changes][Applying Changes]]
 - [[#package-management][Package Management]]
 - [[#performance-optimization][Performance Optimization]]
 - [[#general][General]]
-- [[#org-mode-1][Org Mode]]
+- [[#org-mode][Org Mode]]
   - [[#org][Org]]
   - [[#org-tempo][Org Tempo]]
   - [[#org-superstar][Org Superstar]]
