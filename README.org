@@ -219,6 +219,17 @@
              gcs-done))
 
   (add-hook 'emacs-startup-hook #'ig/display-startup-time)
+
+  (defun ig/open-emacs-configuration ()
+    (interactive)
+    (find-file "~/.emacs.d/README.org"))
+
+  (defun ig/open-dotfiles-configuration ()
+    (interactive)
+    (find-file "~/README.org"))
+
+  (global-set-key (kbd "M-o e") 'ig/open-emacs-configuration)
+  (global-set-key (kbd "M-o d") 'ig/open-dotfiles-configuration)
 #+end_src
 * Org Mode
 ** Org
