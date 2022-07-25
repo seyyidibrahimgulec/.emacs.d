@@ -25,6 +25,7 @@
     - [[#company-web][Company Web]]
     - [[#flycheck][Flycheck]]
   - [[#programming-languages][Programming Languages]]
+    - [[#rust][Rust]]
     - [[#c][C]]
     - [[#go][Go]]
     - [[#emacs-lisp][Emacs Lisp]]
@@ -411,6 +412,12 @@
     (flycheck-checker-error-threshold 1000))
 #+end_src
 ** Programming Languages
+*** Rust
+#+begin_src emacs-lisp :tangle config.el
+  (use-package rust-mode
+    :hook
+    (rust-mode . lsp-deferred))
+#+end_src
 *** C
 #+begin_src emacs-lisp :tangle config.el
   (use-package cc-mode
