@@ -30,6 +30,7 @@
     - [[#go][Go]]
     - [[#emacs-lisp][Emacs Lisp]]
       - [[#aggressive-indent][Aggressive Indent]]
+    - [[#vimrc-mode][Vimrc Mode]]
     - [[#python][Python]]
       - [[#lsp-pyright][Lsp Pyright]]
       - [[#pyvenv][Pyvenv]]
@@ -437,6 +438,10 @@
 #+begin_src emacs-lisp :tangle config.el
   (use-package aggressive-indent
     :hook (emacs-lisp-mode . aggressive-indent-mode))
+#+end_src
+*** Vimrc Mode
+#+begin_src emacs-lisp :tangle config.el
+  (use-package vimrc-mode)
 #+end_src
 *** Python
 #+begin_src emacs-lisp :tangle config.el
