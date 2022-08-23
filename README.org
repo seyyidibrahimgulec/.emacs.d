@@ -250,7 +250,7 @@
     :hook (org-mode . ig/org-mode-setup)
     :custom
     (org-confirm-babel-evaluate nil)
-    (org-ellipsis " ↴") ;; ↴, ▼, ▶, ⤵
+    (org-ellipsis " ⤵") ;; ↴, ▼, ▶, ⤵
     (org-hide-emphasis-markers t)
     (org-agenda-files `(,(expand-file-name "agenda.org" org-directory)))
     :custom-face
