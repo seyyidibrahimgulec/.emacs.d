@@ -232,6 +232,9 @@
 
   (global-set-key (kbd "M-o e") 'ig/open-emacs-configuration)
   (global-set-key (kbd "M-o d") 'ig/open-dotfiles-configuration)
+
+  (use-package rg
+    :defer t)
 #+end_src
 * Org Mode
 ** Org
