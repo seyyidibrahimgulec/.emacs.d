@@ -264,7 +264,8 @@
     (fixed-pitch ((t (:font "Iosevka Aile" :height 120))))
 
     ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-    (org-block ((t (:foreground nil :inherit fixed-pitch))))
+    (org-block ((t (:background "#242237" :foreground nil :inherit fixed-pitch))))
+    (org-block-begin-line ((t (:background "#242237"))))
     (org-table ((t (:inherit fixed-pitch))))
     (org-formula ((t (:inherit fixed-pitch))))
     (org-code ((t (:inherit (shadow fixed-pitch)))))
