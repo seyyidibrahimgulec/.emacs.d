@@ -618,6 +618,7 @@
     (lsp-headerline-breadcrumb-enable nil)
     (lsp-diagnostics-provider :none) ;; To disable default lsp flycheck
     (lsp-file-watch-threshold 10000))
+  (setq +format-with-lsp nil)
 #+end_src
 ** Lsp Ui
 #+begin_src emacs-lisp :tangle config.el
