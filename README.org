@@ -235,6 +235,9 @@
 
   (use-package rg
     :defer t)
+
+  (use-package simple-httpd
+    :ensure t)
 #+end_src
 * Org Mode
 ** Org
