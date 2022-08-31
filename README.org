@@ -439,7 +439,9 @@
 *** Go
 #+begin_src emacs-lisp :tangle config.el
   (use-package go-mode
-    :hook (go-mode . lsp-deferred))
+    :hook (go-mode . lsp-deferred)
+    :config
+    (add-hook 'before-save-hook #'gofmt-before-save))
 #+end_src
 *** Emacs Lisp
 **** Aggressive Indent
